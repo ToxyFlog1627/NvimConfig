@@ -1,6 +1,15 @@
 local M = {}
 
+function M.use(use)
+    use "folke/which-key.nvim"
+end
+
 function M.apply()
+    -- Help for available keybinds:
+    vim.o.timeout = true
+    vim.o.timeoutlen = 300
+    require("which-key").setup()
+
     vim.g.mapleader = ' '
     vim.g.maplocalleader = ' '
 

@@ -14,7 +14,7 @@ function M.apply()
             delete = { text = '-' },
             topdelete = { text = '‾' },
             changedelete = { text = '~' }
-        },
+        }
     }
 end
 

@@ -21,13 +21,14 @@ end
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
-    comments.use(use)
-    git.use(use)
-    lsp.use(use)
-    parser.use(use)
-    search.use(use)
     theme.use(use)
     statusline.use(use)
+    search.use(use)
+    parser.use(use)
+    keybinds.use(use)
+    git.use(use)
+    comments.use(use)
+    lsp.use(use)
 
     use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides
     use 'ggandor/leap.nvim'                   -- Jumping to searched text
@@ -47,20 +48,19 @@ if is_bootstrap then
 end
 
 settings.apply()
-keybinds.apply()
-comments.apply()
-git.apply()
-lsp.apply()
-parser.apply()
-search.apply()
 theme.apply()
 statusline.apply()
+search.apply()
+parser.apply()
+keybinds.apply()
+git.apply()
+comments.apply()
+lsp.apply()
 
 require('indent_blankline').setup { show_trailing_blankline_indent = false }
 require('leap').setup { case_sensitive = true }
 
--- TODO: set up keybindings, settings (only comments were configured)
--- TODO: show help/hints for keybinds
+-- TODO: keybinds: setup keybinds, group by mnemonics, write good descriptions
+-- TODO: move keybinds from lsp to keybinds.lua and refactor/set settings
 -- TODO: move all requires into separate files
--- TODO: todo-comments doesn't find todos in any way and colors don't work. What is up with my config? => Open an issue
--- TODO: write comments for + group up keybinds
+-- TODO: fix todo-comments
