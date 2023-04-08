@@ -32,9 +32,7 @@ function M.apply()
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     local mason_lspconfig = require 'mason-lspconfig'
 
-    mason_lspconfig.setup {
-        ensure_installed = vim.tbl_keys(servers),
-    }
+    mason_lspconfig.setup { ensure_installed = vim.tbl_keys(servers) }
 
     mason_lspconfig.setup_handlers {
         function(server_name)
@@ -47,7 +45,6 @@ function M.apply()
 
                     nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
                     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
                     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
                     nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
                     nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
@@ -64,11 +61,11 @@ function M.apply()
                         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
                     end, '[W]orkspace [L]ist Folders')
 
-                    vim.api.nvim_buf_create_user_command(buffer_number, 'Format', function(_)
+                    vim.api.nvim_buf_create_user_command(buffer_number, 'Format', function()
                         vim.lsp.buf.format()
                     end, { desc = 'Format current buffer with LSP' })
                 end,
-                settings = servers[server_name],
+                settings = servers[server_name]
             }
         end,
     }
@@ -82,7 +79,7 @@ function M.apply()
         snippet = {
             expand = function(args)
                 luasnip.lsp_expand(args.body)
-            end,
+            end
         },
         mapping = cmp.mapping.preset.insert {
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -90,7 +87,7 @@ function M.apply()
             ['<C-Space>'] = cmp.mapping.complete(),
             ['<CR>'] = cmp.mapping.confirm {
                 behavior = cmp.ConfirmBehavior.Replace,
-                select = true,
+                select = true
             },
             ['<Tab>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
@@ -109,12 +106,12 @@ function M.apply()
                 else
                     fallback()
                 end
-            end, { 'i', 's' }),
+            end, { 'i', 's' })
         },
         sources = {
             { name = 'nvim_lsp' },
-            { name = 'luasnip' },
-        },
+            { name = 'luasnip' }
+        }
     }
 end
 

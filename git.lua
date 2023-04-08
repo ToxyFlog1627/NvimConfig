@@ -13,7 +13,7 @@ function M.apply()
             change = { text = '~' },
             delete = { text = '-' },
             topdelete = { text = '‾' },
-            changedelete = { text = '~' },
+            changedelete = { text = '~' }
         },
     }
 end

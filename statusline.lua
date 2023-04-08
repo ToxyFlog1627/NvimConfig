@@ -10,8 +10,16 @@ function M.apply()
             icons_enabled = false,
             theme = 'nord',
             component_separators = '|',
-            section_separators = '',
+            section_separators = ''
         },
+        sections = {
+            lualine_a = { 'mode' },
+            lualine_b = { 'branch' },
+            lualine_c = { 'filename' },
+            lualine_x = { 'searchcount', 'selectioncount', 'diagnostics' },
+            lualine_y = { 'filetype' },
+            lualine_z = { 'location' }
+        }
     }
 end
 

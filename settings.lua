@@ -11,7 +11,7 @@ function M.apply()
     vim.o.updatetime = 250                              -- Decrease update time
     vim.wo.signcolumn = 'yes'                           -- Decrease update time
     vim.o.completeopt = 'menuone,noselect'              -- Set completeopt to have a better completion experience
-    vim.api.nvim_set_option("clipboard", "unnamedplus") -- Yanking to system clipboard
+    vim.api.nvim_set_option('clipboard', 'unnamedplus') -- Yanking to system clipboard
     vim.o.tabstop = 4                                   -- Set tab to 4
     vim.o.shiftwidth = 4                                -- Set tab to 4
 end
