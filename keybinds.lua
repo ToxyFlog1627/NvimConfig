@@ -13,27 +13,37 @@ function M.apply()
     vim.g.mapleader = ' '
     vim.g.maplocalleader = ' '
 
-    vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-    vim.keymap.set('n', 'k', 'v:count == 0 ? "gk" : "k"', { expr = true, silent = true })
-    vim.keymap.set('n', 'j', 'v:count == 0 ? "gj" : "j"', { expr = true, silent = true })
     vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
-    vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-    vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-    vim.keymap.set('n', '<leader>/', function()
-        require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+
+    local telescope = require('telescope.builtin')
+    local nmap = function(keys, func, desc)
+        vim.keymap.set('n', keys, func, { desc = desc })
+    end
+
+    nmap('<leader>e', telescope.oldfiles, 'Find recently opened files')
+    nmap('<leader><leader>', telescope.buffers, 'Find existing buffers')
+    nmap('<leader>f', function()
+        telescope.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
             winblend = 10,
             previewer = false,
         })
-    end, { desc = '[/] Fuzzily search in current buffer]' })
-    vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-    vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-    vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-    vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+    end, 'Search in current buffer')
+
+    nmap('<leader>sf', telescope.find_files, 'Search Files')
+    nmap('<leader>sh', telescope.help_tags, 'Search Help')
+    nmap('<leader>sg', telescope.live_grep, 'Search with Grep')
+    nmap('<leader>sd', telescope.diagnostics, 'Search Diagnostics')
+end
+
+function M.lsp(buffer_number)
+    local map = function(keys, func, desc)
+        vim.keymap.set({ 'n', 'i' }, keys, func, { buffer = buffer_number, desc = desc })
+    end
+
+    map('<C-r>', vim.lsp.buf.rename, 'Rename')
+    map('<M-CR>', vim.lsp.buf.code_action, 'Code action')
+    map('<C-d>', vim.lsp.buf.type_definition, 'Type Definition')
+    map('<C-k>', vim.lsp.buf.signature_help, 'Documentation')
 end
 
 return M

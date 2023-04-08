@@ -40,9 +40,9 @@ end)
 
 if is_bootstrap then
     print '=================================='
-    print '    Plugins are being installed'
-    print '    Wait until Packer completes,'
-    print '       then restart nvim'
+    print '    Plugins are being installed   '
+    print '    Wait until Packer completes,  '
+    print '       then restart nvim          '
     print '=================================='
     return
 end
@@ -60,7 +60,6 @@ lsp.apply()
 require('indent_blankline').setup { show_trailing_blankline_indent = false }
 require('leap').setup { case_sensitive = true }
 
--- TODO: keybinds: setup keybinds, group by mnemonics, write good descriptions
--- TODO: move keybinds from lsp to keybinds.lua and refactor/set settings
+-- TODO: Add more keybinds as needed + descriptions
 -- TODO: move all requires into separate files
 -- TODO: fix todo-comments
