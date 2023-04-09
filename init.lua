@@ -7,7 +7,7 @@ local lsp = require('lsp')
 local parser = require('parser')
 local search = require('search')
 local settings = require('settings')
-local statusline = require('statusline')
+local status_line = require('statusline')
 local theme = require('theme')
 
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
@@ -22,7 +22,7 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     theme.use(use)
-    statusline.use(use)
+    status_line.use(use)
     search.use(use)
     parser.use(use)
     keybinds.use(use)
@@ -30,8 +30,7 @@ require('packer').startup(function(use)
     comments.use(use)
     lsp.use(use)
 
-    use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides
-    use 'ggandor/leap.nvim'                   -- Jumping to searched text
+    use 'lukas-reineke/indent-blankline.nvim'
 
     if is_bootstrap then
         require('packer').sync()
@@ -49,7 +48,7 @@ end
 
 settings.apply()
 theme.apply()
-statusline.apply()
+status_line.apply()
 search.apply()
 parser.apply()
 keybinds.apply()
@@ -58,8 +57,3 @@ comments.apply()
 lsp.apply()
 
 require('indent_blankline').setup { show_trailing_blankline_indent = false }
-require('leap').setup { case_sensitive = true }
-
--- TODO: Add more keybinds as needed + descriptions
--- TODO: move all requires into separate files
--- TODO: fix todo-comments

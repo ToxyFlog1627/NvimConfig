@@ -11,11 +11,13 @@ function M.use(use)
         run = 'make',
         cond = vim.fn.executable 'make' == 1
     }
+    use 'ggandor/leap.nvim'
 end
 
 function M.apply()
     require('telescope').setup()
     pcall(require('telescope').load_extension, 'fzf')
+    require('leap').add_default_mappings()
 end
 
 return M
